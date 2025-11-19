@@ -1,4 +1,4 @@
-# ⚡ VESTWEB ENGINE v2.0
+#  VESTWEB ENGINE v2.0
 ## High-Performance WebGL/WebGPU Graphics Engine
 
 ### Características Principales
@@ -109,7 +109,7 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
 - Configuración balanceada (1.2x DPR)
 - Compatibilidad WebGL2 estándar
 
-### 📊 Rendimiento
+### Rendimiento
 
 - **FPS Target**: 60 FPS en todas las plataformas
 - **Samples progresivos**: Acumulación hasta 1000+ samples
@@ -125,7 +125,7 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
 - **Progressive Rendering** - Acumulación temporal
 - **Ping-Pong Buffers** - Double buffering eficiente
 
-### 📝 Instrucciones de Uso
+### Instrucciones de Uso
 
 1. **Abrir el motor**:
    ```bash
@@ -202,7 +202,7 @@ NEXUS Engine v2.0
     └── Resolution Scaling
 ```
 
-### 🐛 Troubleshooting
+### Troubleshooting
 
 **Pantalla negra:**
 - Verifica que tu GPU soporte WebGL 2.0
@@ -218,7 +218,7 @@ NEXUS Engine v2.0
 - Haz click en el canvas para activar pointer lock
 - Presiona `ESC` para desactivar pointer lock
 
-### 📄 Licencia
+### Licencia
 
 Este motor es un proyecto de demostración avanzada. Libre para uso educativo y experimental.
 
