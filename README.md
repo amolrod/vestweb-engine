@@ -1,7 +1,7 @@
 # ⚡ VESTWEB ENGINE v2.0
 ## High-Performance WebGL/WebGPU Graphics Engine
 
-### 🚀 Características Principales
+### Características Principales
 
 #### **1. Sistema de Renderizado Avanzado**
 - **WebGL 2.0** optimizado para todas las plataformas
@@ -83,7 +83,7 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
   VESTWEB.VirtualFS.listFiles(dir)
   ```
 
-### 🎨 Materiales PBR Incluidos
+### Materiales PBR Incluidos
 
 1. **Suelo ajedrezado** - Metal rugoso con variación
 2. **Fractal (KIFS)** - Cerámica con subsurface scattering
@@ -91,7 +91,7 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
 4. **Metal dorado** - Oro pulido
 5. **Luces emisivas** - Rojo, azul y blanco
 
-### ⚙️ Optimizaciones por Plataforma
+### Optimizaciones por Plataforma
 
 #### **macOS (Apple Silicon / Intel)**
 - Resolución adaptativa (1.0x DPR)
@@ -164,7 +164,7 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
    NEXUS.CameraSystem.sensitivity = 0.01      // Más sensible
    ```
 
-### 🎯 Arquitectura del Motor
+### Arquitectura del Motor
 
 ```
 NEXUS Engine v2.0
@@ -222,18 +222,18 @@ NEXUS Engine v2.0
 
 Este motor es un proyecto de demostración avanzada. Libre para uso educativo y experimental.
 
-### 🔥 Características Destacadas
+### Características Destacadas
 
-- ✅ **100% Standalone** - Sin dependencias externas
-- ✅ **Cross-Platform** - macOS, Windows, Linux
-- ✅ **GPU Optimizado** - Nvidia, AMD, Apple Silicon, Intel
-- ✅ **Modular** - API extensible
-- ✅ **Production Ready** - Código comentado y organizado
-- ✅ **Real-time Physics** - Colisiones y gravedad
-- ✅ **Advanced Graphics** - PBR, RT, SSAO, Bloom, DOF
+- **100% Standalone** - Sin dependencias externas
+- **Cross-Platform** - macOS, Windows, Linux
+- **GPU Optimizado** - Nvidia, AMD, Apple Silicon, Intel
+- **Modular** - API extensible
+- **Production Ready** - Código comentado y organizado
+- **Real-time Physics** - Colisiones y gravedad
+- **Advanced Graphics** - PBR, RT, SSAO, Bloom, DOF
 
 ---
 
-**Desarrollado con ❤️ usando WebGL 2.0 y JavaScript puro**
+**Desarrollado usando WebGL 2.0 y JavaScript puro**
 
-*NEXUS Engine v2.0 - Where Graphics Meet Physics*
+*NEXUS Engine v2.0*
