@@ -32,3 +32,5 @@ yarn-error.log*
 # Archivos de respaldo
 *.bak
 *.backup
+MARKETING.md
+README_LAUNCH.md
