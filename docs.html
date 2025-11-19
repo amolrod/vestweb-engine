@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Vestweb Engine</title>
+    <meta name="description" content="Complete documentation for Vestweb Engine. API reference, features, and guides.">
+    <style>
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00b8d4;
+            --secondary: #6366f1;
+            --accent: #10b981;
+            --bg-dark: #050507;
+            --bg-panel: #0f1016;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(10, 10, 15, 0.7);
+            --font-heading: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+        h1 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.4rem; margin-top: 2rem; margin-bottom: 0.8rem; color: var(--primary); }
+        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.2rem; }
+        ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        
+        a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--primary-dark); }
+
+        /* Code Blocks */
+        pre {
+            background: #1e1e2e;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--card-border);
+        }
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #a9b1d6;
+        }
+        p code, li code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: #e0e0e0;
+            font-size: 0.85rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+
+        /* Layout */
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            padding-top: 100px;
+            padding-bottom: 4rem;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        
+        .sidebar-section { margin-bottom: 2rem; }
+        .sidebar-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        .sidebar-link {
+            display: block;
+            color: #a0a0a0;
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .sidebar-link:hover { color: var(--primary); }
+        .sidebar-link.active { color: var(--primary); font-weight: 600; }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .docs-layout { grid-template-columns: 1fr; }
+            .sidebar { display: none; } /* Mobile menu would be better but keeping simple */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                VESTWEB<span>ENGINE</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="docs.html" class="nav-link active">Docs</a>
+                <a href="tutorial.html" class="nav-link">Tutorial</a>
+                <a href="changelog.html" class="nav-link">Changelog</a>
+                <a href="motor.html" class="btn-primary">Launch Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container docs-layout">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Getting Started</div>
+                <a href="#introduction" class="sidebar-link">Introduction</a>
+                <a href="#installation" class="sidebar-link">Installation</a>
+                <a href="#quick-start" class="sidebar-link">Quick Start</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Core Features</div>
+                <a href="#rendering" class="sidebar-link">Rendering System</a>
+                <a href="#physics" class="sidebar-link">Physics Engine</a>
+                <a href="#controls" class="sidebar-link">Controls</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">API Reference</div>
+                <a href="#api-global" class="sidebar-link">Global API</a>
+                <a href="#api-physics" class="sidebar-link">Physics API</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section id="introduction">
+                <h1>Documentation</h1>
+                <p>Welcome to the official documentation for <strong>Vestweb Engine v2.0</strong>. A high-performance WebGL/WebGPU graphics engine built entirely with vanilla JavaScript.</p>
+            </section>
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <p>Vestweb Engine is designed to be zero-dependency. You don't need `npm install` or build tools to get started.</p>
+                <p>Simply download the `motor.html` file and open it in any modern browser.</p>
+                <pre><code>&lt;!-- No installation required. Just open the file! --&gt;</code></pre>
+            </section>
+
+            <section id="quick-start">
+                <h2>Quick Start</h2>
+                <p>To start using the engine, open the developer console (F12) in your browser while running the demo.</p>
+                <pre><code>// Check engine status
+VESTWEB.info();
+
+// Reset the scene
+VESTWEB.reset();</code></pre>
+            </section>
+
+            <section id="rendering">
+                <h2>Rendering System</h2>
+                <p>The engine uses a hybrid rendering pipeline combining rasterization for UI and Path Tracing for the 3D scene.</p>
+                <h3>Key Features</h3>
+                <ul>
+                    <li><strong>WebGL 2.0</strong> optimized for all platforms</li>
+                    <li><strong>Path Tracing</strong> with up to 5 bounces</li>
+                    <li><strong>PBR</strong> (Physically Based Rendering) with Cook-Torrance BRDF</li>
+                    <li><strong>Post-Processing</strong>: SSAO, Bloom, Volumetric Fog, Tone Mapping</li>
+                </ul>
+            </section>
+
+            <section id="physics">
+                <h2>Physics Engine</h2>
+                <p>Real-time rigid body physics simulation using Verlet integration.</p>
+                <ul>
+                    <li>Sphere-Sphere and Sphere-Plane collisions</li>
+                    <li>Configurable gravity, mass, friction, and restitution</li>
+                    <li>Optimized collision detection</li>
+                </ul>
+            </section>
+
+            <section id="controls">
+                <h2>Controls</h2>
+                <ul>
+                    <li><code>W/A/S/D</code> - Move camera</li>
+                    <li><code>Space</code> - Move Up</li>
+                    <li><code>Shift</code> - Move Down</li>
+                    <li><code>Mouse</code> - Look around (Click to lock)</li>
+                    <li><code>P</code> - Toggle Physics</li>
+                    <li><code>G</code> - Toggle Gravity</li>
+                    <li><code>R</code> - Reset Camera</li>
+                </ul>
+            </section>
+
+            <section id="api-global">
+                <h2>Global API</h2>
+                <p>Access the engine via the global <code>window.VESTWEB</code> object.</p>
+                <pre><code>VESTWEB.info()
+// Returns current engine statistics and version
+
+VESTWEB.reset()
+// Resets the camera and physics state</code></pre>
+            </section>
+
+            <section id="api-physics">
+                <h2>Physics API</h2>
+                <p>Add objects to the physics simulation dynamically.</p>
+                <pre><code>VESTWEB.addPhysicsObject({
+    position: [0, 10, 0],   // [x, y, z]
+    velocity: [0, 0, 0],    // [vx, vy, vz]
+    mass: 1.0,
+    radius: 0.5,
+    restitution: 0.8,       // Bounciness (0-1)
+    friction: 0.5,          // Friction (0-1)
+    dynamic: true           // false for static objects
+});</code></pre>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 Vestweb Engine. MIT License.
+        </div>
+    </footer>
+
+</body>
+</html>

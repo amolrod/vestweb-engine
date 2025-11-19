@@ -55,7 +55,7 @@ Cada objeto físico tiene estas propiedades:
 
 ```javascript
 // Esfera que cae desde arriba
-NEXUS.addPhysicsObject({
+VESTWEB.addPhysicsObject({
     position: [0, 10, 0],      // 10 unidades arriba del origen
     velocity: [0, 0, 0],       // Comienza quieta
     mass: 1.0,                 // Masa estándar
@@ -70,7 +70,7 @@ NEXUS.addPhysicsObject({
 
 #### Pelota de Tenis (muy bouncy)
 ```javascript
-NEXUS.addPhysicsObject({
+VESTWEB.addPhysicsObject({
     position: [0, 15, 0],
     velocity: [0, -2, 0],      // Empieza cayendo
     mass: 0.058,               // Masa real de pelota de tenis
@@ -83,7 +83,7 @@ NEXUS.addPhysicsObject({
 
 #### Bola de Boliche (pesada)
 ```javascript
-NEXUS.addPhysicsObject({
+VESTWEB.addPhysicsObject({
     position: [0, 5, 0],
     velocity: [5, 0, 0],       // Lanzamiento horizontal
     mass: 7.26,                // Masa de bola de boliche
@@ -96,7 +96,7 @@ NEXUS.addPhysicsObject({
 
 #### Pelota de Golf
 ```javascript
-NEXUS.addPhysicsObject({
+VESTWEB.addPhysicsObject({
     position: [-5, 2, 0],
     velocity: [10, 8, 0],      // Lanzamiento rápido
     mass: 0.046,               // Muy ligera
@@ -111,29 +111,29 @@ NEXUS.addPhysicsObject({
 
 ```javascript
 // Gravedad terrestre (default)
-NEXUS.PhysicsSystem.gravity = [0, -9.8, 0]
+VESTWEB.PhysicsSystem.gravity = [0, -9.8, 0]
 
 // Luna
-NEXUS.PhysicsSystem.gravity = [0, -1.62, 0]
+VESTWEB.PhysicsSystem.gravity = [0, -1.62, 0]
 
 // Marte
-NEXUS.PhysicsSystem.gravity = [0, -3.71, 0]
+VESTWEB.PhysicsSystem.gravity = [0, -3.71, 0]
 
 // Júpiter
-NEXUS.PhysicsSystem.gravity = [0, -24.79, 0]
+VESTWEB.PhysicsSystem.gravity = [0, -24.79, 0]
 
 // Sin gravedad (espacio)
-NEXUS.PhysicsSystem.gravity = [0, 0, 0]
+VESTWEB.PhysicsSystem.gravity = [0, 0, 0]
 
 // Gravedad lateral (experimental)
-NEXUS.PhysicsSystem.gravity = [-9.8, 0, 0]
+VESTWEB.PhysicsSystem.gravity = [-9.8, 0, 0]
 ```
 
 ### Modificar Objetos Existentes
 
 ```javascript
 // Obtener todos los objetos dinámicos
-let objects = NEXUS.PhysicsSystem.objects.filter(o => o.dynamic)
+let objects = VESTWEB.PhysicsSystem.objects.filter(o => o.dynamic)
 
 // Hacer que todos reboten más
 objects.forEach(obj => {
@@ -161,11 +161,11 @@ objects.forEach(obj => {
 #### Escena 1: Torre de Caída
 ```javascript
 // Limpiar objetos existentes
-NEXUS.reset()
+VESTWEB.reset()
 
 // Crear torre vertical de objetos
 for (let i = 0; i < 10; i++) {
-    NEXUS.addPhysicsObject({
+    VESTWEB.addPhysicsObject({
         position: [0, 1 + i * 1.1, 0],
         velocity: [0, 0, 0],
         mass: 1.0,
@@ -178,7 +178,7 @@ for (let i = 0; i < 10; i++) {
 
 // Lanzar proyectil para derribar la torre
 setTimeout(() => {
-    NEXUS.addPhysicsObject({
+    VESTWEB.addPhysicsObject({
         position: [-15, 3, 0],
         velocity: [20, 2, 0],
         mass: 5.0,
@@ -194,7 +194,7 @@ setTimeout(() => {
 ```javascript
 // Crear cascada que cae continuamente
 let cascadeInterval = setInterval(() => {
-    NEXUS.addPhysicsObject({
+    VESTWEB.addPhysicsObject({
         position: [
             (Math.random() - 0.5) * 8,
             15,
@@ -216,11 +216,11 @@ setTimeout(() => clearInterval(cascadeInterval), 10000)
 #### Escena 3: Newton's Cradle (Péndulo de Newton)
 ```javascript
 // Limpiar
-NEXUS.reset()
+VESTWEB.reset()
 
 // Crear 5 esferas en línea
 for (let i = 0; i < 5; i++) {
-    NEXUS.addPhysicsObject({
+    VESTWEB.addPhysicsObject({
         position: [i * 1.1 - 2.2, 3, 0],
         velocity: [0, 0, 0],
         mass: 1.0,
@@ -232,7 +232,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 // Lanzar la primera esfera
-NEXUS.PhysicsSystem.objects[NEXUS.PhysicsSystem.objects.length - 5].velocity = [10, 0, 0]
+VESTWEB.PhysicsSystem.objects[VESTWEB.PhysicsSystem.objects.length - 5].velocity = [10, 0, 0]
 ```
 
 ---
@@ -243,38 +243,38 @@ NEXUS.PhysicsSystem.objects[NEXUS.PhysicsSystem.objects.length - 5].velocity = [
 
 ```javascript
 // Vista frontal
-NEXUS.CameraSystem.position = [0, 3, -10]
-NEXUS.CameraSystem.pitch = 0
-NEXUS.CameraSystem.yaw = 0
-NEXUS.Engine.resetFrame()
+VESTWEB.CameraSystem.position = [0, 3, -10]
+VESTWEB.CameraSystem.pitch = 0
+VESTWEB.CameraSystem.yaw = 0
+VESTWEB.Engine.resetFrame()
 
 // Vista aérea
-NEXUS.CameraSystem.position = [0, 20, 0]
-NEXUS.CameraSystem.pitch = -Math.PI / 2  // Mirando hacia abajo
-NEXUS.CameraSystem.yaw = 0
-NEXUS.Engine.resetFrame()
+VESTWEB.CameraSystem.position = [0, 20, 0]
+VESTWEB.CameraSystem.pitch = -Math.PI / 2  // Mirando hacia abajo
+VESTWEB.CameraSystem.yaw = 0
+VESTWEB.Engine.resetFrame()
 
 // Vista diagonal
-NEXUS.CameraSystem.position = [10, 10, 10]
-NEXUS.CameraSystem.pitch = -Math.PI / 4
-NEXUS.CameraSystem.yaw = -Math.PI / 4
-NEXUS.Engine.resetFrame()
+VESTWEB.CameraSystem.position = [10, 10, 10]
+VESTWEB.CameraSystem.pitch = -Math.PI / 4
+VESTWEB.CameraSystem.yaw = -Math.PI / 4
+VESTWEB.Engine.resetFrame()
 ```
 
 ### Configuración de Cámara
 
 ```javascript
 // Velocidad de movimiento
-NEXUS.CameraSystem.speed = 0.2  // Más rápida
-NEXUS.CameraSystem.speed = 0.05 // Más lenta
+VESTWEB.CameraSystem.speed = 0.2  // Más rápida
+VESTWEB.CameraSystem.speed = 0.05 // Más lenta
 
 // Sensibilidad del ratón
-NEXUS.CameraSystem.sensitivity = 0.005  // Más sensible
-NEXUS.CameraSystem.sensitivity = 0.001  // Menos sensible
+VESTWEB.CameraSystem.sensitivity = 0.005  // Más sensible
+VESTWEB.CameraSystem.sensitivity = 0.001  // Menos sensible
 
 // Field of View (Zoom)
-NEXUS.CameraSystem.fov = 2.0  // Más zoom out
-NEXUS.CameraSystem.fov = 1.0  // Más zoom in
+VESTWEB.CameraSystem.fov = 2.0  // Más zoom out
+VESTWEB.CameraSystem.fov = 1.0  // Más zoom in
 ```
 
 ### Animación de Cámara
@@ -285,13 +285,13 @@ function orbitCamera(radius = 10, speed = 0.02) {
     let angle = 0
     let orbitInterval = setInterval(() => {
         angle += speed
-        NEXUS.CameraSystem.position = [
+        VESTWEB.CameraSystem.position = [
             Math.cos(angle) * radius,
             5,
             Math.sin(angle) * radius
         ]
-        NEXUS.CameraSystem.yaw = angle + Math.PI / 2
-        NEXUS.Engine.resetFrame()
+        VESTWEB.CameraSystem.yaw = angle + Math.PI / 2
+        VESTWEB.Engine.resetFrame()
     }, 16)
     
     // Retornar función para detener
@@ -307,7 +307,7 @@ stopOrbit()
 ```javascript
 // Movimiento suave hacia un objetivo
 function moveCameraTo(targetPos, duration = 2000) {
-    const start = [...NEXUS.CameraSystem.position]
+    const start = [...VESTWEB.CameraSystem.position]
     const startTime = Date.now()
     
     function animate() {
@@ -319,13 +319,13 @@ function moveCameraTo(targetPos, duration = 2000) {
             ? 2 * progress * progress 
             : -1 + (4 - 2 * progress) * progress
         
-        NEXUS.CameraSystem.position = [
+        VESTWEB.CameraSystem.position = [
             start[0] + (targetPos[0] - start[0]) * t,
             start[1] + (targetPos[1] - start[1]) * t,
             start[2] + (targetPos[2] - start[2]) * t
         ]
         
-        NEXUS.Engine.resetFrame()
+        VESTWEB.Engine.resetFrame()
         
         if (progress < 1) {
             requestAnimationFrame(animate)
@@ -352,9 +352,9 @@ moveCameraTo([5, 10, -5], 3000)  // Mover en 3 segundos
 
 Ahora tendrás acceso a:
 ```javascript
-NexusExtensions.spawn.randomSpheres(10)
-NexusExtensions.camera.aerial()
-NexusExtensions.physics.moon()
+VestwebExtensions.spawn.randomSpheres(10)
+VestwebExtensions.camera.aerial()
+VestwebExtensions.physics.moon()
 // etc...
 ```
 
@@ -366,32 +366,32 @@ NexusExtensions.physics.moon()
 
 ```javascript
 // Ver estadísticas en tiempo real
-console.log('FPS:', NEXUS.Engine.fps)
-console.log('Samples:', NEXUS.Engine.frameCount)
-console.log('Objects:', NEXUS.PhysicsSystem.objects.length)
-console.log('Collisions:', NEXUS.PhysicsSystem.collisions)
+console.log('FPS:', VESTWEB.Engine.fps)
+console.log('Samples:', VESTWEB.Engine.frameCount)
+console.log('Objects:', VESTWEB.PhysicsSystem.objects.length)
+console.log('Collisions:', VESTWEB.PhysicsSystem.collisions)
 ```
 
 ### Optimizar para Más FPS
 
 ```javascript
 // Reducir objetos físicos
-let dynamicCount = NEXUS.PhysicsSystem.objects.filter(o => o.dynamic).length
+let dynamicCount = VESTWEB.PhysicsSystem.objects.filter(o => o.dynamic).length
 if (dynamicCount > 50) {
     // Eliminar objetos más antiguos
-    NEXUS.PhysicsSystem.objects = NEXUS.PhysicsSystem.objects.filter((o, i) => 
-        !o.dynamic || i >= NEXUS.PhysicsSystem.objects.length - 30
+    VESTWEB.PhysicsSystem.objects = VESTWEB.PhysicsSystem.objects.filter((o, i) => 
+        !o.dynamic || i >= VESTWEB.PhysicsSystem.objects.length - 30
     )
 }
 
 // Reducir substeps de física (menos preciso pero más rápido)
-NEXUS.PhysicsSystem.substeps = 2  // Default es 4
+VESTWEB.PhysicsSystem.substeps = 2  // Default es 4
 
 // Desactivar física temporalmente
-NEXUS.PhysicsSystem.enabled = false
+VESTWEB.PhysicsSystem.enabled = false
 
 // Reactivar
-NEXUS.PhysicsSystem.enabled = true
+VESTWEB.PhysicsSystem.enabled = true
 ```
 
 ### Límite de Samples para Interactividad
@@ -399,8 +399,8 @@ NEXUS.PhysicsSystem.enabled = true
 ```javascript
 // Limitar samples para mantener la escena interactiva
 setInterval(() => {
-    if (NEXUS.Engine.frameCount > 200) {
-        NEXUS.Engine.resetFrame()
+    if (VESTWEB.Engine.frameCount > 200) {
+        VESTWEB.Engine.resetFrame()
     }
 }, 100)
 ```
@@ -417,24 +417,24 @@ setInterval(() => {
 // ============================================
 
 // 1. Reset completo
-NEXUS.reset()
+VESTWEB.reset()
 
 // 2. Configurar física
-NEXUS.PhysicsSystem.gravity = [0, -9.8, 0]
-NEXUS.PhysicsSystem.substeps = 4
+VESTWEB.PhysicsSystem.gravity = [0, -9.8, 0]
+VESTWEB.PhysicsSystem.substeps = 4
 
 // 3. Configurar cámara
-NEXUS.CameraSystem.position = [0, 5, -15]
-NEXUS.CameraSystem.pitch = 0.2
-NEXUS.CameraSystem.yaw = 0
-NEXUS.CameraSystem.speed = 0.15
+VESTWEB.CameraSystem.position = [0, 5, -15]
+VESTWEB.CameraSystem.pitch = 0.2
+VESTWEB.CameraSystem.yaw = 0
+VESTWEB.CameraSystem.speed = 0.15
 
 // 4. Crear objetos estáticos
 // (suelo ya existe por defecto)
 
 // 5. Crear objetos dinámicos
 for (let i = 0; i < 5; i++) {
-    NEXUS.addPhysicsObject({
+    VESTWEB.addPhysicsObject({
         position: [i * 2 - 4, 10, 0],
         velocity: [0, 0, 0],
         mass: 1.0,
@@ -469,11 +469,11 @@ link.click()
 // Guardar estado actual
 const sceneData = {
     camera: {
-        position: NEXUS.CameraSystem.position,
-        pitch: NEXUS.CameraSystem.pitch,
-        yaw: NEXUS.CameraSystem.yaw
+        position: VESTWEB.CameraSystem.position,
+        pitch: VESTWEB.CameraSystem.pitch,
+        yaw: VESTWEB.CameraSystem.yaw
     },
-    objects: NEXUS.PhysicsSystem.objects.filter(o => o.dynamic).map(o => ({
+    objects: VESTWEB.PhysicsSystem.objects.filter(o => o.dynamic).map(o => ({
         position: o.position,
         velocity: o.velocity,
         mass: o.mass,
@@ -493,13 +493,13 @@ copy(JSON.stringify(sceneData, null, 2))
 const sceneData = { /* ... */ }
 
 // Restaurar
-NEXUS.reset()
-NEXUS.CameraSystem.position = sceneData.camera.position
-NEXUS.CameraSystem.pitch = sceneData.camera.pitch
-NEXUS.CameraSystem.yaw = sceneData.camera.yaw
+VESTWEB.reset()
+VESTWEB.CameraSystem.position = sceneData.camera.position
+VESTWEB.CameraSystem.pitch = sceneData.camera.pitch
+VESTWEB.CameraSystem.yaw = sceneData.camera.yaw
 
 sceneData.objects.forEach(obj => {
-    NEXUS.addPhysicsObject({...obj, dynamic: true})
+    VESTWEB.addPhysicsObject({...obj, dynamic: true})
 })
 ```
 
@@ -510,28 +510,28 @@ sceneData.objects.forEach(obj => {
 **Q: Los objetos atraviesan el suelo**
 ```javascript
 // A: Aumentar substeps de física
-NEXUS.PhysicsSystem.substeps = 8
+VESTWEB.PhysicsSystem.substeps = 8
 ```
 
 **Q: Los objetos se mueven muy rápido**
 ```javascript
 // A: Reducir gravedad o velocidades iniciales
-NEXUS.PhysicsSystem.gravity = [0, -5, 0]
+VESTWEB.PhysicsSystem.gravity = [0, -5, 0]
 ```
 
 **Q: FPS muy bajo**
 ```javascript
 // A: Limpiar objetos y reducir substeps
-NEXUS.reset()
-NEXUS.PhysicsSystem.substeps = 2
+VESTWEB.reset()
+VESTWEB.PhysicsSystem.substeps = 2
 ```
 
 **Q: Cámara se mueve muy lento**
 ```javascript
 // A: Aumentar velocidad
-NEXUS.CameraSystem.speed = 0.3
+VESTWEB.CameraSystem.speed = 0.3
 ```
 
 ---
 
-¡Diviértete experimentando con NEXUS Engine! 🚀
+¡Diviértete experimentando con VESTWEB Engine! 🚀

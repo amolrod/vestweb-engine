@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - Vestweb Engine</title>
+    <meta name="description" content="Release notes and changelog for Vestweb Engine.">
+    <style>
+        /* Reusing CSS from docs.html for consistency */
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00b8d4;
+            --secondary: #6366f1;
+            --accent: #10b981;
+            --bg-dark: #050507;
+            --bg-panel: #0f1016;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(10, 10, 15, 0.7);
+            --font-heading: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+        h1 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.2rem; }
+        ul { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text-muted); list-style: none; }
+        li { margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem; }
+        li::before {
+            content: '•';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--primary-dark); }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+
+        /* Changelog Specific */
+        .changelog-content {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+        }
+
+        .release {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 4rem;
+            border-left: 2px solid var(--card-border);
+        }
+
+        .release::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+        }
+
+        .release-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .version-tag {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .release-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .change-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .change-type {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .type-feature { color: var(--accent); }
+        .type-fix { color: #fbbf24; }
+        .type-perf { color: #60a5fa; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                VESTWEB<span>ENGINE</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="docs.html" class="nav-link">Docs</a>
+                <a href="tutorial.html" class="nav-link">Tutorial</a>
+                <a href="changelog.html" class="nav-link active">Changelog</a>
+                <a href="motor.html" class="btn-primary">Launch Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container changelog-content">
+        <h1>Changelog</h1>
+        <p>All notable changes to Vestweb Engine will be documented in this file.</p>
+
+        <div class="release">
+            <div class="release-header">
+                <span class="version-tag">v2.0.0</span>
+                <span class="release-date">November 19, 2025</span>
+            </div>
+            
+            <div class="change-group">
+                <span class="change-type type-feature">New Features</span>
+                <ul>
+                    <li><strong>Physics Engine:</strong> Real-time rigid body physics with sphere-sphere and sphere-plane collisions.</li>
+                    <li><strong>Advanced Controls:</strong> Full WASD keyboard support, Pointer Lock mouse control, and Gamepad support.</li>
+                    <li><strong>PBR Rendering:</strong> Complete Cook-Torrance BRDF implementation with GGX distribution.</li>
+                    <li><strong>Post-Processing:</strong> Added SSAO, Bloom, Volumetric Fog, and ACES Tone Mapping.</li>
+                    <li><strong>Virtual FS:</strong> In-memory file system for asset management.</li>
+                </ul>
+            </div>
+
+            <div class="change-group">
+                <span class="change-type type-perf">Performance</span>
+                <ul>
+                    <li>Optimized WebGL 2.0 pipeline for macOS (Apple Silicon) and Windows.</li>
+                    <li>Adaptive resolution scaling based on device capabilities.</li>
+                    <li>Efficient shader compilation and uniform caching.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="release">
+            <div class="release-header">
+                <span class="version-tag">v1.0.0</span>
+                <span class="release-date">October 2025</span>
+            </div>
+            <div class="change-group">
+                <span class="change-type type-feature">Initial Release</span>
+                <ul>
+                    <li>Basic Path Tracing implementation.</li>
+                    <li>Simple sphere rendering.</li>
+                    <li>Initial WebGL setup.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 Vestweb Engine. MIT License.
+        </div>
+    </footer>
+
+</body>
+</html>

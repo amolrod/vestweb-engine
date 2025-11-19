@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Vestweb Engine</title>
+    <meta name="description" content="Step-by-step tutorial for Vestweb Engine. Learn physics, camera controls, and scene creation.">
+    <style>
+        /* Reusing CSS from docs.html for consistency */
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00b8d4;
+            --secondary: #6366f1;
+            --accent: #10b981;
+            --bg-dark: #050507;
+            --bg-panel: #0f1016;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(10, 10, 15, 0.7);
+            --font-heading: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+        h1 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
+        h3 { font-size: 1.4rem; margin-top: 2rem; margin-bottom: 0.8rem; color: var(--primary); }
+        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.2rem; }
+        ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text-muted); }
+        li { margin-bottom: 0.5rem; }
+        
+        a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--primary-dark); }
+
+        /* Code Blocks */
+        pre {
+            background: #1e1e2e;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--card-border);
+        }
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #a9b1d6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .container {
+            max-width: 1000px; /* Narrower for tutorial readability */
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .nav-link:hover, .nav-link.active { color: #fff; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn-primary:hover { opacity: 0.9; }
+
+        /* Tutorial Specific */
+        .tutorial-content {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--primary);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 200px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            margin: 1.5rem 0;
+            border: 1px dashed var(--card-border);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                VESTWEB<span>ENGINE</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="docs.html" class="nav-link">Docs</a>
+                <a href="tutorial.html" class="nav-link active">Tutorial</a>
+                <a href="changelog.html" class="nav-link">Changelog</a>
+                <a href="motor.html" class="btn-primary">Launch Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container tutorial-content">
+        <h1>Interactive Tutorial</h1>
+        <p>Learn how to master Vestweb Engine in 5 simple steps.</p>
+
+        <div class="step-card">
+            <div class="step-number">Step 1</div>
+            <h2>Launch the Engine</h2>
+            <p>Open <code>motor.html</code> in your browser. You'll see the loading screen followed by the main scene.</p>
+            <div class="placeholder-img">
+                [Screenshot: Loading Screen]
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">Step 2</div>
+            <h2>Basic Controls</h2>
+            <p>Navigate the 3D world using standard FPS controls:</p>
+            <ul>
+                <li><strong>WASD</strong> to move horizontally</li>
+                <li><strong>Space</strong> to fly up</li>
+                <li><strong>Shift</strong> to fly down</li>
+                <li><strong>Mouse</strong> to look around (Click to lock cursor)</li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">Step 3</div>
+            <h2>Developer Console</h2>
+            <p>Open your browser's developer tools (F12 or Cmd+Opt+I). Type the following command to verify the engine is running:</p>
+            <pre><code>VESTWEB.info()</code></pre>
+            <p>You should see a formatted output with version and system info.</p>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">Step 4</div>
+            <h2>Creating Physics Objects</h2>
+            <p>Let's spawn a bouncing ball! Paste this code into the console:</p>
+            <pre><code>VESTWEB.addPhysicsObject({
+    position: [0, 10, 0],
+    velocity: [0, 0, 0],
+    mass: 1.0,
+    radius: 0.5,
+    restitution: 0.9, // High bounce
+    friction: 0.5,
+    dynamic: true
+});</code></pre>
+            <p>Look up! You should see a sphere falling and bouncing.</p>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">Step 5</div>
+            <h2>Advanced Physics</h2>
+            <p>Try creating a heavy bowling ball:</p>
+            <pre><code>VESTWEB.addPhysicsObject({
+    position: [2, 5, 0],
+    velocity: [0, 0, 0],
+    mass: 10.0,       // Heavy
+    radius: 0.8,
+    restitution: 0.1, // Low bounce
+    friction: 0.8,
+    dynamic: true
+});</code></pre>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <h2>Ready to experiment?</h2>
+            <a href="motor.html" class="btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem; margin-top: 1rem; display: inline-block;">Launch Engine Now</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            &copy; 2025 Vestweb Engine. MIT License.
+        </div>
+    </footer>
+
+</body>
+</html>

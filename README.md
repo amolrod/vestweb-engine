@@ -180,10 +180,10 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
 3. **Debug y extensión**:
    ```javascript
    // Abrir consola del navegador (F12)
-   NEXUS.info()  // Ver información del motor
+   VESTWEB.info()  // Ver información del motor
    
    // Añadir objeto físico personalizado
-   NEXUS.addPhysicsObject({
+   VESTWEB.addPhysicsObject({
        position: [0, 10, 0],
        velocity: [1, 0, 0],
        mass: 2.0,
@@ -194,18 +194,18 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
    })
    
    // Modificar configuración de física
-   NEXUS.PhysicsSystem.gravity = [0, -20, 0]  // Gravedad fuerte
-   NEXUS.PhysicsSystem.substeps = 8           // Más precisión
+   VESTWEB.PhysicsSystem.gravity = [0, -20, 0]  // Gravedad fuerte
+   VESTWEB.PhysicsSystem.substeps = 8           // Más precisión
    
    // Modificar cámara
-   NEXUS.CameraSystem.speed = 0.5             // Más rápida
-   NEXUS.CameraSystem.sensitivity = 0.01      // Más sensible
+   VESTWEB.CameraSystem.speed = 0.5             // Más rápida
+   VESTWEB.CameraSystem.sensitivity = 0.01      // Más sensible
    ```
 
 ### Arquitectura del Motor
 
 ```
-NEXUS Engine v2.0
+VESTWEB Engine v2.0
 ├── Core
 │   ├── WebGL2 Context
 │   ├── Shader Compilation
