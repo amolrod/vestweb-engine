@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Vestweb Engine Banner](https://via.placeholder.com/1200x400/1a1a2e/00d9ff?text=VESTWEB+ENGINE+v2.0)
+![Vestweb Engine Banner](docs/images/banner.png)
 
 **High-Performance WebGL/WebGPU Graphics Engine**
 
