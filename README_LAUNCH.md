@@ -1,27 +1,48 @@
 # Vestweb Engine
 
+<div align="center">
+
+![Vestweb Engine Banner](https://via.placeholder.com/1400x500/0f0f23/00d9ff?text=VESTWEB+ENGINE)
+
+# 🚀 Vestweb Engine
+
+**High-performance WebGL/WebGPU graphics engine for the modern web**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![WebGL 2.0](https://img.shields.io/badge/WebGL-2.0-blue.svg)](https://www.khronos.org/webgl/)
 [![WebGPU](https://img.shields.io/badge/WebGPU-Roadmap-orange.svg)](https://www.w3.org/TR/webgpu/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/vestweb-engine.svg?style=social&label=Star)](https://github.com/yourusername/vestweb-engine)
-[![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/vestweb-engine.svg)](https://github.com/yourusername/vestweb-engine/commits/main)
+[![GitHub stars](https://img.shields.io/github/stars/amolrod/vestweb-engine.svg?style=social&label=Star)](https://github.com/amolrod/vestweb-engine)
+[![GitHub last commit](https://img.shields.io/github/last-commit/amolrod/vestweb-engine.svg)](https://github.com/amolrod/vestweb-engine/commits/main)
 
-![Vestweb Engine Banner](docs/images/banner.png)
+### No frameworks. No build tools. Just pure, optimized WebGL2.
 
-**Vestweb Engine** is a high-performance WebGL/WebGPU graphics engine built entirely with vanilla JavaScript. Designed for both web applications and interactive experiences, Vestweb combines advanced rendering techniques with real-time physics simulation to deliver desktop-grade graphics in the browser.
+[🎮 **Live Demo**](https://amolrod.github.io/vestweb-engine/) • [📖 **Documentation**](README.md) • [🚀 **Quick Start**](#quick-start) • [💬 **Community**](#community)
 
-With support for PBR (Physically Based Rendering), path tracing, SSAO, volumetric fog, and a complete rigid-body physics system, Vestweb Engine provides everything you need to build stunning 3D experiences without any external dependencies.
+</div>
 
-**No frameworks. No build tools. Just pure, optimized WebGL2.**
+---
 
-![Hero Demo](docs/images/hero-demo.gif)
+## 🎬 See It In Action
 
-## Live Demo
+<div align="center">
 
-**[Try Vestweb Engine Now →](https://yourusername.github.io/vestweb-engine/)**
+### Desktop-Grade Graphics in Your Browser
 
-![Demo Preview](docs/images/demo-preview.png)
+| PBR + Path Tracing | Real-Time Physics | Advanced Post-Processing |
+|:---:|:---:|:---:|
+| ![PBR Rendering](https://via.placeholder.com/380x280/1a1a2e/00d9ff?text=Cook-Torrance+BRDF%0APBR+Materials) | ![Physics Engine](https://via.placeholder.com/380x280/1a1a2e/00ff9f?text=Verlet+Integration%0ACollision+Detection) | ![Post Effects](https://via.placeholder.com/380x280/1a1a2e/ff6b9d?text=SSAO+%2B+Bloom%0AVolumetric+Fog) |
+| Physically accurate materials with metallic/roughness workflow | Rigid body dynamics with friction and restitution | Industry-standard effects with ACES tone mapping |
+
+### What Makes Vestweb Special?
+
+**Vestweb Engine** delivers AAA-quality graphics directly in the browser using vanilla JavaScript and WebGL 2.0. Built for developers who want desktop-level rendering without the complexity of large frameworks or build pipelines.
+
+✨ **5-bounce path tracing** • 🎨 **Full PBR workflow** • ⚡ **Real-time physics** • 🎯 **Zero dependencies** • 🔥 **Production-ready**
+
+</div>
+
+---
 
 ## Key Features
 

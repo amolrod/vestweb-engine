@@ -1,5 +1,36 @@
 #  VESTWEB ENGINE v2.0
-## High-Performance WebGL/WebGPU Graphics Engine
+
+<div align="center">
+
+![Vestweb Engine Banner](https://via.placeholder.com/1200x400/1a1a2e/00d9ff?text=VESTWEB+ENGINE+v2.0)
+
+**High-Performance WebGL/WebGPU Graphics Engine**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![WebGL 2.0](https://img.shields.io/badge/WebGL-2.0-blue.svg)](https://www.khronos.org/webgl/)
+[![WebGPU](https://img.shields.io/badge/WebGPU-Roadmap-orange.svg)](https://www.w3.org/TR/webgpu/)
+
+🚀 Motor gráfico de alto rendimiento sin dependencias | 🎮 Física en tiempo real | 🎨 PBR + Path Tracing
+
+</div>
+
+---
+
+## 📸 Vista Previa
+
+<div align="center">
+
+| Rendering PBR | Física en Tiempo Real | Post-Processing |
+|:---:|:---:|:---:|
+| ![PBR](https://via.placeholder.com/350x250/2d3561/00d9ff?text=PBR+Rendering) | ![Physics](https://via.placeholder.com/350x250/2d3561/00ff9f?text=Real-Time+Physics) | ![Post](https://via.placeholder.com/350x250/2d3561/ff6b9d?text=SSAO+%2B+Bloom) |
+
+**Vestweb Engine** renderiza gráficos de nivel desktop directamente en el navegador usando WebGL 2.0 puro.
+
+[**🎮 Demo en Vivo**](https://amolrod.github.io/vestweb-engine/) | [**📖 Documentación**](TUTORIAL.md) | [**🚀 Quick Start**](#instalación)
+
+</div>
+
+---
 
 ### Características Principales
 
