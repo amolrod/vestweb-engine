@@ -1,307 +1,681 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vestweb Engine - Documentation Hub</title>
+    <title>Vestweb Engine | High-Performance WebGL Graphics</title>
+    <meta name="description" content="Professional WebGL/WebGPU graphics engine. PBR, Physics, Ray Tracing in vanilla JavaScript.">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00b8d4;
+            --secondary: #6366f1;
+            --accent: #10b981;
+            --bg-dark: #050507;
+            --bg-panel: #0f1016;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(10, 10, 15, 0.7);
+            --font-heading: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+
         body {
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.02em; }
+        h1 { font-size: clamp(3rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+        p { color: var(--text-muted); font-size: 1.125rem; margin-bottom: 1.5rem; }
         
-        .container {
-            max-width: 1200px;
-            width: 100%;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, #00ffff, #00ccff);
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
         }
-        
-        .subtitle {
-            color: #8cf;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
-        
-        .version {
-            display: inline-block;
-            background: rgba(0, 255, 255, 0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--card-border);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: #fff; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(0, 217, 255, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-window {
+            background: #1e1e2e;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .code-window:hover {
+            transform: perspective(1000px) rotateY(0) rotateX(0);
+        }
+
+        .window-header {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .code-content {
+            padding: 20px;
+            font-family: var(--font-mono);
             font-size: 0.9rem;
-            margin-top: 15px;
-            border: 1px solid #0cf;
+            color: #a9b1d6;
         }
-        
+
+        .keyword { color: #bb9af7; }
+        .function { color: #7aa2f7; }
+        .string { color: #9ece6a; }
+        .comment { color: #565f89; }
+
+        /* Features Grid */
+        .features {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            gap: 2rem;
         }
-        
+
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             backdrop-filter: blur(10px);
         }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
-            border-color: #0ff;
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
         }
-        
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        
-        .card h2 {
-            color: #0ff;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .card p {
-            color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #00ccff, #0099ff);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0, 204, 255, 0.5);
-        }
-        
-        .btn-primary {
-            font-size: 1.2rem;
-            padding: 15px 40px;
-            background: linear-gradient(135deg, #00ff88, #00ccff);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(0, 255, 136, 0.8);
-            }
-        }
-        
-        .features {
+
+        .card:hover::before { opacity: 1; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 30px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
         }
-        
-        .feature-tag {
-            background: rgba(0, 255, 255, 0.15);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #0ff;
+
+        /* Stats/Performance */
+        .stats-section {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 217, 255, 0.05), transparent);
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
         }
-        
-        footer {
-            text-align: center;
-            padding-top: 50px;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-            color: #888;
-        }
-        
-        .stats {
+
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .stat {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
             text-align: center;
-            padding: 20px;
-            background: rgba(0, 255, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
         }
-        
+
         .stat-number {
-            font-size: 2rem;
-            color: #0ff;
-            font-weight: bold;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .stat-label {
-            color: #aaa;
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding: 4rem 0 2rem;
+            background: #020203;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 { color: #fff; margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.8rem; }
+        .footer-col a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
             font-size: 0.9rem;
-            margin-top: 5px;
         }
+
+        /* Utilities */
+        .hidden { opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+        .visible { opacity: 1; transform: translateY(0); }
         
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+            .hero-visual { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>⚡ VESTWEB ENGINE</h1>
-            <p class="subtitle">HIGH-PERFORMANCE WEBGL/WEBGPU GRAPHICS</p>
-            <div class="version">v2.0.0</div>
-        </header>
-        
-        <div style="text-align: center; margin-bottom: 50px;">
-            <a href="motor.html" class="btn btn-primary">🚀 LAUNCH ENGINE</a>
-        </div>
-        
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Standalone</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">WebGL2</div>
-                <div class="stat-label">Technology</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">60 FPS</div>
-                <div class="stat-label">Target</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">1700+</div>
-                <div class="stat-label">Lines of Code</div>
+
+    <nav id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                VESTWEB<span>ENGINE</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#performance" class="nav-link">Performance</a>
+                <a href="TUTORIAL.md" class="nav-link">Docs</a>
+                <a href="https://github.com/amolrod/vestweb-engine" class="nav-link">GitHub</a>
+                <a href="motor.html" class="btn btn-primary" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Launch Demo</a>
             </div>
         </div>
-        
-        <div class="features">
-            <span class="feature-tag">✓ PBR Rendering</span>
-            <span class="feature-tag">✓ Ray Tracing</span>
-            <span class="feature-tag">✓ Real-time Physics</span>
-            <span class="feature-tag">✓ SSAO</span>
-            <span class="feature-tag">✓ Bloom</span>
-            <span class="feature-tag">✓ Volumetric Fog</span>
-            <span class="feature-tag">✓ Soft Shadows</span>
-            <span class="feature-tag">✓ Multi-platform</span>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <div class="hero-text hidden">
+                <div style="display: inline-block; padding: 5px 15px; background: rgba(0, 217, 255, 0.1); border-radius: 20px; color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; border: 1px solid rgba(0, 217, 255, 0.2);">
+                    ✨ v2.0 Now Available
+                </div>
+                <h1>The Future of <br><span class="gradient-text">Web Graphics</span></h1>
+                <p>
+                    Experience desktop-grade rendering in your browser. Vestweb Engine combines PBR, Path Tracing, and Real-time Physics in a lightweight, vanilla JavaScript package.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                    <a href="motor.html" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        Launch Live Demo
+                    </a>
+                    <a href="https://github.com/amolrod/vestweb-engine" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+                <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+                    <span style="margin-right: 15px;">✓ WebGL 2.0</span>
+                    <span style="margin-right: 15px;">✓ No Dependencies</span>
+                    <span>✓ Open Source</span>
+                </div>
+            </div>
+            
+            <div class="hero-visual hidden" style="transition-delay: 0.2s;">
+                <div class="code-window">
+                    <div class="window-header">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="code-content">
+                        <div class="line"><span class="keyword">import</span> { Engine } <span class="keyword">from</span> <span class="string">'./vestweb'</span>;</div>
+                        <br>
+                        <div class="line"><span class="comment">// Initialize the engine</span></div>
+                        <div class="line"><span class="keyword">const</span> engine = <span class="keyword">new</span> <span class="function">Engine</span>({</div>
+                        <div class="line">&nbsp;&nbsp;canvas: <span class="string">'#viewport'</span>,</div>
+                        <div class="line">&nbsp;&nbsp;physics: <span class="keyword">true</span>,</div>
+                        <div class="line">&nbsp;&nbsp;raytracing: <span class="keyword">true</span></div>
+                        <div class="line">});</div>
+                        <br>
+                        <div class="line"><span class="comment">// Add a PBR material</span></div>
+                        <div class="line"><span class="keyword">const</span> material = <span class="keyword">new</span> <span class="function">PBRMaterial</span>({</div>
+                        <div class="line">&nbsp;&nbsp;roughness: <span class="string">0.2</span>,</div>
+                        <div class="line">&nbsp;&nbsp;metalness: <span class="string">1.0</span></div>
+                        <div class="line">});</div>
+                        <br>
+                        <div class="line"><span class="function">engine.start</span>(); <span class="comment">// 🚀 Ready to launch</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon">📖</div>
-                <h2>Documentation</h2>
-                <p>Documentación completa del motor con características, API, y guías de uso.</p>
-                <a href="README.md" class="btn" download>View README</a>
+    </header>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header hidden">
+                <h2>Engineered for <span class="gradient-text">Performance</span></h2>
+                <p>Built from the ground up to leverage modern GPU capabilities without the bloat.</p>
             </div>
             
-            <div class="card">
-                <div class="card-icon">🎓</div>
-                <h2>Tutorial</h2>
-                <p>Tutorial avanzado con ejemplos paso a paso de física, cámara, y creación de escenas.</p>
-                <a href="TUTORIAL.md" class="btn" download>View Tutorial</a>
-            </div>
-            
-            <div class="card" style="opacity: 0.6;">
-                <div class="card-icon">🔧</div>
-                <h2>Extensions</h2>
-                <p>Sistema de extensiones (En desarrollo - próximamente)</p>
-                <a href="#" class="btn" style="opacity: 0.5; cursor: not-allowed;">En Desarrollo</a>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">📝</div>
-                <h2>Changelog</h2>
-                <p>Historial completo de cambios, mejoras y nuevas características de v2.0.</p>
-                <a href="CHANGELOG.md" class="btn" download>View Changelog</a>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">💻</div>
-                <h2>Source Code</h2>
-                <p>Código fuente completo del motor con shaders GLSL y JavaScript.</p>
-                <a href="motor.html" class="btn" download>Download HTML</a>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">🎮</div>
-                <h2>Try It Now</h2>
-                <p>Lanza el motor directamente en tu navegador y experimenta con la demo interactiva.</p>
-                <a href="motor.html" class="btn">Launch Engine</a>
+            <div class="grid">
+                <div class="card hidden">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                            <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                            <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                            <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                            <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                            <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                        </svg>
+                    </div>
+                    <h3>PBR Rendering</h3>
+                    <p>Physically Based Rendering pipeline with Cook-Torrance BRDF, Fresnel-Schlick, and GGX distribution for realistic materials.</p>
+                </div>
+
+                <div class="card hidden" style="transition-delay: 0.1s;">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 12h20"></path>
+                            <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"></path>
+                            <path d="M12 2v10"></path>
+                            <path d="M12 2a7 7 0 0 1 7 7v3"></path>
+                            <path d="M12 2a7 7 0 0 0-7 7v3"></path>
+                        </svg>
+                    </div>
+                    <h3>Path Tracing</h3>
+                    <p>Real-time path tracing with up to 5 bounces, progressive accumulation, and Russian Roulette optimization.</p>
+                </div>
+
+                <div class="card hidden" style="transition-delay: 0.2s;">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3>Physics Engine</h3>
+                    <p>Integrated Verlet integration physics system with sphere-sphere/plane collisions and configurable gravity.</p>
+                </div>
+
+                <div class="card hidden" style="transition-delay: 0.3s;">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </div>
+                    <h3>Post-Processing</h3>
+                    <p>Cinematic effects stack including SSAO, Bloom, Volumetric Fog, and ACES Tone Mapping.</p>
+                </div>
+
+                <div class="card hidden" style="transition-delay: 0.4s;">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3>Cross-Platform</h3>
+                    <p>Optimized for macOS (M1/M2/M3), Windows, and Linux. Adaptive resolution scaling for best performance.</p>
+                </div>
+
+                <div class="card hidden" style="transition-delay: 0.5s;">
+                    <div class="icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 17 10 11 4 5"></polyline>
+                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                        </svg>
+                    </div>
+                    <h3>Zero Dependencies</h3>
+                    <p>Pure vanilla JavaScript. No frameworks, no build tools required. Just drop in and render.</p>
+                </div>
             </div>
         </div>
-        
-        <div class="card" style="background: rgba(0, 255, 136, 0.05); border-color: rgba(0, 255, 136, 0.3);">
-            <h2 style="color: #0f8;">🚀 Quick Start</h2>
-            <p>Para empezar, simplemente:</p>
-            <ol style="color: #aaa; line-height: 2; margin-left: 20px;">
-                <li>Haz click en "Launch Engine" arriba</li>
-                <li>Usa <strong style="color: #0ff;">WASD</strong> para moverte</li>
-                <li>Arrastra el <strong style="color: #0ff;">ratón</strong> para mirar alrededor</li>
-                <li>Presiona <strong style="color: #0ff;">F12</strong> y escribe <code style="background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 3px; color: #0f8;">VESTWEB.info()</code></li>
-                <li>Consulta el <strong style="color: #0ff;">Tutorial</strong> para ejemplos avanzados</li>
-            </ol>
+    </section>
+
+    <section id="performance" class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item hidden">
+                    <div class="stat-number">60+</div>
+                    <div class="stat-label">FPS Target</div>
+                </div>
+                <div class="stat-item hidden" style="transition-delay: 0.1s;">
+                    <div class="stat-number">2.0</div>
+                    <div class="stat-label">WebGL Version</div>
+                </div>
+                <div class="stat-item hidden" style="transition-delay: 0.2s;">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Light Bounces</div>
+                </div>
+                <div class="stat-item hidden" style="transition-delay: 0.3s;">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Dependencies</div>
+                </div>
+            </div>
         </div>
-        
-        <footer>
-            <p>Vestweb Engine v2.0 - High-Performance WebGL/WebGPU Graphics</p>
-            <p>Desarrollado con ❤️ usando WebGL/WebGPU y JavaScript puro</p>
-            <p style="margin-top: 10px; font-size: 0.9rem;">
-                Compatible con macOS (Apple Silicon/Intel) • Windows (NVIDIA/AMD) • Linux
-            </p>
-            <p style="margin-top: 20px; color: #666;">
-                © 2025 - Proyecto de demostración educativa
-            </p>
-        </footer>
-    </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-bg"></div>
+        <div class="container">
+            <div class="hidden">
+                <h2 style="margin-bottom: 1.5rem;">Ready to create stunning 3D experiences?</h2>
+                <p style="max-width: 600px; margin: 0 auto 2.5rem;">
+                    Join the future of web graphics. Open source, high performance, and built for developers.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="motor.html" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                        Start Engine
+                    </a>
+                    <a href="TUTORIAL.md" class="btn btn-secondary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                        Read Documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+                        VESTWEB<span>ENGINE</span>
+                    </a>
+                    <p style="font-size: 0.9rem; max-width: 300px;">
+                        A high-performance WebGL/WebGPU graphics engine built for the modern web. MIT Licensed.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="TUTORIAL.md">Documentation</a></li>
+                        <li><a href="CHANGELOG.md">Changelog</a></li>
+                        <li><a href="motor.html">Live Demo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/amolrod/vestweb-engine">GitHub</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Vestweb Engine. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mouse move effect for cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
 </body>
 </html>
