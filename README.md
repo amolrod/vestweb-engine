@@ -2,7 +2,8 @@
 
 <div align="center">
 
-![Vestweb Engine Banner](docs/images/banner.png)
+![Vestweb Engine Banner](docs/images/banner.jpg)
+
 
 **High-Performance WebGL/WebGPU Graphics Engine**
 
@@ -10,23 +11,29 @@
 [![WebGL 2.0](https://img.shields.io/badge/WebGL-2.0-blue.svg)](https://www.khronos.org/webgl/)
 [![WebGPU](https://img.shields.io/badge/WebGPU-Roadmap-orange.svg)](https://www.w3.org/TR/webgpu/)
 
-🚀 Motor gráfico de alto rendimiento sin dependencias | 🎮 Física en tiempo real | 🎨 PBR + Path Tracing
+ Motor gráfico de alto rendimiento sin dependencias |  Física en tiempo real |  PBR + Path Tracing
 
 </div>
 
 ---
 
-## 📸 Vista Previa
+##  Vista del Motor
 
 <div align="center">
 
-| Rendering PBR | Física en Tiempo Real | Post-Processing |
-|:---:|:---:|:---:|
-| ![PBR](https://via.placeholder.com/350x250/2d3561/00d9ff?text=PBR+Rendering) | ![Physics](https://via.placeholder.com/350x250/2d3561/00ff9f?text=Real-Time+Physics) | ![Post](https://via.placeholder.com/350x250/2d3561/ff6b9d?text=SSAO+%2B+Bloom) |
+ Rendering PBR  
+
+![PBR](docs/images/general.jpg) 
+
+ Física en Tiempo Real 
+
+![PBR](docs/images/reflejo.jpg) 
+
+
 
 **Vestweb Engine** renderiza gráficos de nivel desktop directamente en el navegador usando WebGL 2.0 puro.
 
-[**🎮 Demo en Vivo**](https://amolrod.github.io/vestweb-engine/) | [**📖 Documentación**](TUTORIAL.md) | [**🚀 Quick Start**](#instalación)
+[** Documentación **](TUTORIAL.md)
 
 </div>
 
@@ -267,4 +274,4 @@ Este motor es un proyecto de demostración avanzada. Libre para uso educativo y 
 
 **Desarrollado usando WebGL 2.0 y JavaScript puro**
 
-*NEXUS Engine v2.0*
+*VESTWEB Engine v2.0*

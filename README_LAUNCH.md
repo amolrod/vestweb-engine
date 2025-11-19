@@ -17,38 +17,18 @@
 
 ### No frameworks. No build tools. Just pure, optimized WebGL2.
 
-[🎮 **Live Demo**](https://amolrod.github.io/vestweb-engine/) • [📖 **Documentation**](README.md) • [🚀 **Quick Start**](#quick-start) • [💬 **Community**](#community)
+
 
 </div>
 
 ---
 
-## 🎬 See It In Action
-
-<div align="center">
-
-### Desktop-Grade Graphics in Your Browser
-
-| PBR + Path Tracing | Real-Time Physics | Advanced Post-Processing |
-|:---:|:---:|:---:|
-| ![PBR Rendering](https://via.placeholder.com/380x280/1a1a2e/00d9ff?text=Cook-Torrance+BRDF%0APBR+Materials) | ![Physics Engine](https://via.placeholder.com/380x280/1a1a2e/00ff9f?text=Verlet+Integration%0ACollision+Detection) | ![Post Effects](https://via.placeholder.com/380x280/1a1a2e/ff6b9d?text=SSAO+%2B+Bloom%0AVolumetric+Fog) |
-| Physically accurate materials with metallic/roughness workflow | Rigid body dynamics with friction and restitution | Industry-standard effects with ACES tone mapping |
-
-### What Makes Vestweb Special?
-
-**Vestweb Engine** delivers AAA-quality graphics directly in the browser using vanilla JavaScript and WebGL 2.0. Built for developers who want desktop-level rendering without the complexity of large frameworks or build pipelines.
-
-✨ **5-bounce path tracing** • 🎨 **Full PBR workflow** • ⚡ **Real-time physics** • 🎯 **Zero dependencies** • 🔥 **Production-ready**
-
-</div>
-
----
 
 ## Key Features
 
 ### Advanced Rendering Pipeline
 
-![Rendering Features](docs/images/rendering-features.png)
+![Rendering Features](docs/images/features.jpg)
 
 - **Physically Based Rendering (PBR)**: Cook-Torrance BRDF with GGX distribution
 - **Path Tracing**: Up to 5 ray bounces with progressive accumulation
@@ -66,8 +46,6 @@
 
 ### Real-Time Physics System
 
-![Physics System](docs/images/physics-demo.gif)
-
 - **Rigid Body Dynamics**: Verlet integration with configurable substeps
 - **Collision Detection**: Sphere-sphere and sphere-plane with broad-phase optimization
 - **Physical Properties**:
@@ -79,7 +57,6 @@
 
 ### Modular Rendering API
 
-![API Architecture](docs/images/api-structure.png)
 
 ```javascript
 // Simple and intuitive API
@@ -104,7 +81,6 @@ engine.camera.moveTo([5, 5, -10], 2000); // 2 second transition
 
 ### Cross-Platform Optimization
 
-![Platform Support](docs/images/platform-compatibility.png)
 
 | Platform | GPU | Optimization | DPR Scale |
 |----------|-----|--------------|-----------|
@@ -529,32 +505,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Open source graphics community
 - Early testers and contributors
 
-## Gallery
-
-![Gallery Image 1](docs/images/gallery-1.png)
-*PBR materials showcase: metal, glass, ceramic*
-
-![Gallery Image 2](docs/images/gallery-2.png)
-*Real-time physics simulation with 50+ objects*
-
-![Gallery Image 3](docs/images/gallery-3.png)
-*Volumetric fog and atmospheric scattering*
-
-![Gallery Image 4](docs/images/gallery-4.png)
-*Path traced reflections and refractions*
-
-![Gallery Image 5](docs/images/gallery-5.png)
-*SSAO and bloom post-processing*
-
-![Gallery Image 6](docs/images/gallery-6.png)
-*Fractal geometry with subsurface scattering*
-
 ---
 
 **Built with passion for real-time graphics**
 
 **Star this project if you find it useful!**
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/vestweb-engine.svg?style=social&label=Star)](https://github.com/yourusername/vestweb-engine)
+[![GitHub stars](https://img.shields.io/github/stars/amolrod/vestweb-engine.svg?style=social&label=Star)](https://github.com/amolrod/vestweb-engine)
 
 Made with WebGL/WebGPU and vanilla JavaScript • No frameworks • No dependencies • 2025
