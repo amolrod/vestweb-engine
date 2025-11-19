@@ -117,7 +117,7 @@ VESTWEB.RenderBuffers   // Buffers de renderizado
 - **Substeps físicos**: 4 iteraciones por frame
 - **Memory Safe**: Gestión automática de buffers
 
-### 🛠️ Tecnologías Utilizadas
+### Tecnologías Utilizadas
 
 - **WebGL 2.0** - Renderizado GPU
 - **GLSL ES 3.0** - Shaders de alta precisión
