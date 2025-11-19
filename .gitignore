@@ -1,0 +1,35 @@
+# Archivos en desarrollo (no listos para producci\u00f3n)
+extensions.js
+
+# Archivos del sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archivos de editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+
+# Node modules (si se a\u00f1aden dependencias en el futuro)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de respaldo
+*.bak
+*.backup

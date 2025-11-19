@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vestweb Engine - Documentation Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #00ffff, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        .subtitle {
+            color: #8cf;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        
+        .version {
+            display: inline-block;
+            background: rgba(0, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            border: 1px solid #0cf;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
+            border-color: #0ff;
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .card h2 {
+            color: #0ff;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .card p {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00ccff, #0099ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 204, 255, 0.5);
+        }
+        
+        .btn-primary {
+            font-size: 1.2rem;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(0, 255, 136, 0.8);
+            }
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-tag {
+            background: rgba(0, 255, 255, 0.15);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #0ff;
+        }
+        
+        footer {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            color: #888;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            color: #0ff;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ VESTWEB ENGINE</h1>
+            <p class="subtitle">HIGH-PERFORMANCE WEBGL/WEBGPU GRAPHICS</p>
+            <div class="version">v2.0.0</div>
+        </header>
+        
+        <div style="text-align: center; margin-bottom: 50px;">
+            <a href="motor.html" class="btn btn-primary">🚀 LAUNCH ENGINE</a>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Standalone</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">WebGL2</div>
+                <div class="stat-label">Technology</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">60 FPS</div>
+                <div class="stat-label">Target</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">1700+</div>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <span class="feature-tag">✓ PBR Rendering</span>
+            <span class="feature-tag">✓ Ray Tracing</span>
+            <span class="feature-tag">✓ Real-time Physics</span>
+            <span class="feature-tag">✓ SSAO</span>
+            <span class="feature-tag">✓ Bloom</span>
+            <span class="feature-tag">✓ Volumetric Fog</span>
+            <span class="feature-tag">✓ Soft Shadows</span>
+            <span class="feature-tag">✓ Multi-platform</span>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">📖</div>
+                <h2>Documentation</h2>
+                <p>Documentación completa del motor con características, API, y guías de uso.</p>
+                <a href="README.md" class="btn" download>View README</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🎓</div>
+                <h2>Tutorial</h2>
+                <p>Tutorial avanzado con ejemplos paso a paso de física, cámara, y creación de escenas.</p>
+                <a href="TUTORIAL.md" class="btn" download>View Tutorial</a>
+            </div>
+            
+            <div class="card" style="opacity: 0.6;">
+                <div class="card-icon">🔧</div>
+                <h2>Extensions</h2>
+                <p>Sistema de extensiones (En desarrollo - próximamente)</p>
+                <a href="#" class="btn" style="opacity: 0.5; cursor: not-allowed;">En Desarrollo</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">📝</div>
+                <h2>Changelog</h2>
+                <p>Historial completo de cambios, mejoras y nuevas características de v2.0.</p>
+                <a href="CHANGELOG.md" class="btn" download>View Changelog</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">💻</div>
+                <h2>Source Code</h2>
+                <p>Código fuente completo del motor con shaders GLSL y JavaScript.</p>
+                <a href="motor.html" class="btn" download>Download HTML</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">🎮</div>
+                <h2>Try It Now</h2>
+                <p>Lanza el motor directamente en tu navegador y experimenta con la demo interactiva.</p>
+                <a href="motor.html" class="btn">Launch Engine</a>
+            </div>
+        </div>
+        
+        <div class="card" style="background: rgba(0, 255, 136, 0.05); border-color: rgba(0, 255, 136, 0.3);">
+            <h2 style="color: #0f8;">🚀 Quick Start</h2>
+            <p>Para empezar, simplemente:</p>
+            <ol style="color: #aaa; line-height: 2; margin-left: 20px;">
+                <li>Haz click en "Launch Engine" arriba</li>
+                <li>Usa <strong style="color: #0ff;">WASD</strong> para moverte</li>
+                <li>Arrastra el <strong style="color: #0ff;">ratón</strong> para mirar alrededor</li>
+                <li>Presiona <strong style="color: #0ff;">F12</strong> y escribe <code style="background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 3px; color: #0f8;">VESTWEB.info()</code></li>
+                <li>Consulta el <strong style="color: #0ff;">Tutorial</strong> para ejemplos avanzados</li>
+            </ol>
+        </div>
+        
+        <footer>
+            <p>Vestweb Engine v2.0 - High-Performance WebGL/WebGPU Graphics</p>
+            <p>Desarrollado con ❤️ usando WebGL/WebGPU y JavaScript puro</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                Compatible con macOS (Apple Silicon/Intel) • Windows (NVIDIA/AMD) • Linux
+            </p>
+            <p style="margin-top: 20px; color: #666;">
+                © 2025 - Proyecto de demostración educativa
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
