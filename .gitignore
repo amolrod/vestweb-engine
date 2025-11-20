@@ -1,5 +1,5 @@
-# Archivos en desarrollo (no listos para producci\u00f3n)
-extensions.js
+# Archivos en desarrollo (no listos para producción)
+# extensions.js (Activado para pruebas)
 # Archivos del sistema operativo
 .DS_Store
 .DS_Store?
